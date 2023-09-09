@@ -9,73 +9,49 @@
 package Task01;
 
 public class Calculator {
-    public static String compute(final String input) {
-        if (input.isEmpty())
-            return "Error: expression cannot be empty.";
+    public static double compute(final String input) {
+        if (input.isEmpty()) {
+            throw new IllegalArgumentException("Error: the expression cannot be empty.");
+        }
 
-        final String[] expression = getExpression(input);
-        if (expression.length > 3)
-            return "Error: too many operands and/or operators.";
+        final Expression expression = new Expression(input);
 
-        try {
-            final double firstOperand = Double.parseDouble(expression[0]);
-            final String operator = expression[1];
-            final double secondOperand = Double.parseDouble(expression[2]);
+        final double firstOperand = expression.getFirstOperand();
+        final double secondOperand = expression.getSecondOperand();
+        final ExpressionOperators operator = expression.getOperator();
 
-            switch (operator) {
-                case "+" -> {
-                    return add(firstOperand, secondOperand).toString();
-                }
-                case "-" -> {
-                    return subtract(firstOperand, secondOperand).toString();
-                }
-                case "*" -> {
-                    return multiply(firstOperand, secondOperand).toString();
-                }
-                case "/" -> {
-                    return divide(firstOperand, secondOperand).toString();
-                }
-                default -> {
-                    return "Error: invalid operator sign.";
-                }
+        switch (operator) {
+            case ADDITION -> {
+                return add(firstOperand, secondOperand);
             }
-        } catch (final NumberFormatException ex) {
-            return "Error: the operands in the expression must be numbers.";
-        } catch (final IndexOutOfBoundsException ex) {
-            return "Error: the expression is incomplete.";
-        } catch (final ArithmeticException ex) {
-            return "Error: division by zero or a number too large.";
+            case SUBTRACTION -> {
+                return subtract(firstOperand, secondOperand);
+            }
+            case MULTIPLICATION -> {
+                return multiply(firstOperand, secondOperand);
+            }
+            case DIVISION -> {
+                return divide(firstOperand, secondOperand);
+            }
+            default -> throw new IllegalArgumentException("Error: unknown operator.");
         }
     }
 
-    private static String[] getExpression(final String input) {
-        char ch;
-        for (int ii = 0; ii < input.length(); ii++) {
-            ch = input.charAt(ii);
-            if (!Character.isDigit(ch) && ch != '.') // Checking if a character is a digit, if not - the assumption
-                                                     // that it is an operator.
-                return new String[] { input.substring(0, ii), String.valueOf(input.charAt(ii)),
-                        input.substring(ii + 1) };
-        }
-
-        return new String[] {};
-    }
-
-    private static Double add(final double firstOperand, final double secondOperand) {
+    private static double add(final double firstOperand, final double secondOperand) {
         return firstOperand + secondOperand;
     }
 
-    private static Double subtract(final double firstOperand, final double secondOperand) {
+    private static double subtract(final double firstOperand, final double secondOperand) {
         return firstOperand - secondOperand;
     }
 
-    private static Double multiply(final double firstOperand, final double secondOperand) {
+    private static double multiply(final double firstOperand, final double secondOperand) {
         return firstOperand * secondOperand;
     }
 
-    private static Double divide(final double firstOperand, final double secondOperand) {
+    private static double divide(final double firstOperand, final double secondOperand) {
         if (secondOperand == 0)
-            throw new ArithmeticException();
+            throw new ArithmeticException("Error: division by zero or a number too large.");
 
         return firstOperand / secondOperand;
     }

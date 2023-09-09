@@ -26,7 +26,11 @@ public class Main {
             if (input.equals("q"))
                 break;
 
-            System.out.println(Calculator.compute(input));
+            try {
+                System.out.println(Calculator.compute(input));
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }
