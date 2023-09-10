@@ -13,7 +13,7 @@ import java.util.List;
 public class Matrix {
     // region Fields
 
-    public final Double[][] container;
+    public final double[][] container;
 
     // endregion
 
@@ -35,21 +35,26 @@ public class Matrix {
         final int numRows = rows.size();
         final int numCols = rows.get(0).length;
 
-        for (final Double[] row: rows)
-            if (row.length != numCols)
+        for (final Double[] row : rows) {
+            if (row.length != numCols) {
                 throw new IllegalArgumentException("The matrix is not rectangular.");
+            }
+        }
 
-        this.container = new Double[numRows][numCols];
-        for (int ii = 0; ii < numRows; ii++)
+        this.container = new double[numRows][numCols];
+        for (int ii = 0; ii < numRows; ii++) {
             System.arraycopy(rows.get(ii), 0, this.container[ii], 0, numCols);
+        }
     }
 
-    public Matrix(final Double[][] container) {
+    public Matrix(final double[][] container) {
         final int numCols = container[0].length;
 
-        for (final Double[] row: container)
-            if (row.length != numCols)
+        for (final double[] row : container) {
+            if (row.length != numCols) {
                 throw new IllegalArgumentException("The matrix is not rectangular.");
+            }
+        }
 
         this.container = container;
     }
@@ -58,24 +63,26 @@ public class Matrix {
 
     // region Methods
 
-    public Matrix multiply(final Matrix target) {
-        if (this.getNumCols() != target.getNumRows())
+    public Matrix multiply(final Matrix that) {
+        if (this.getNumCols() != that.getNumRows()) {
             throw new IllegalArgumentException("The number of columns in the first matrix must match the number of " +
-                    "rows in the second matrix.");
+                                               "rows in the second matrix.");
+        }
 
         final int numRows = this.getNumRows();
-        final int numCols = target.getNumCols();
+        final int numCols = that.getNumCols();
         final int multiplyRank = this.getNumCols();
 
-        final Double[][] productContainer = new Double[numRows][numCols];
+        final double[][] productContainer = new double[numRows][numCols];
 
-        for (int ii = 0; ii < numRows; ii++)
+        for (int ii = 0; ii < numRows; ii++) {
             for (int jj = 0; jj < numCols; jj++) {
                 productContainer[ii][jj] = 0d;
                 for (int kk = 0; kk < multiplyRank; kk++) {
-                    productContainer[ii][jj] += this.container[ii][kk] * target.container[kk][jj];
+                    productContainer[ii][jj] += this.container[ii][kk] * that.container[kk][jj];
                 }
             }
+        }
 
         return new Matrix(productContainer);
     }
@@ -84,10 +91,11 @@ public class Matrix {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        for (final Double[] row: this.container) {
+        for (final double[] row : this.container) {
             sb.append("\n");
-            for (final Double element: row)
+            for (final Double element : row) {
                 sb.append(element).append(" ");
+            }
         }
 
         sb.append("\n");

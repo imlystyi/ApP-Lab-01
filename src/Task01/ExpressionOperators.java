@@ -35,9 +35,11 @@ public enum ExpressionOperators {
     // region Methods
 
     public static ExpressionOperators fromString(final String operator) {
-        for (final ExpressionOperators expressionOperator : ExpressionOperators.values())
-            if (expressionOperator.operator.equals(operator))
+        for (final ExpressionOperators expressionOperator : ExpressionOperators.values()) {
+            if (expressionOperator.operator.equals(operator)) {
                 return expressionOperator;
+            }
+        }
 
         throw new IllegalArgumentException("Error: unknown operator.");
     }

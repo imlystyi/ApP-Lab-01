@@ -50,8 +50,9 @@ public class Calculator {
     }
 
     private static double divide(final double firstOperand, final double secondOperand) {
-        if (secondOperand == 0)
+        if (secondOperand == 0) {
             throw new ArithmeticException("Error: division by zero or a number too large.");
+        }
 
         return firstOperand / secondOperand;
     }

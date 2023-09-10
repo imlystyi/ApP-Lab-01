@@ -20,15 +20,15 @@ public class Expression {
     // region Getters and setters
 
     public double getFirstOperand() {
-        return firstOperand;
+        return this.firstOperand;
     }
 
     public double getSecondOperand() {
-        return secondOperand;
+        return this.secondOperand;
     }
 
     public ExpressionOperators getOperator() {
-        return operator;
+        return this.operator;
     }
 
     // endregion
@@ -44,7 +44,7 @@ public class Expression {
                     this.firstOperand = Double.parseDouble(stringRepresentation.substring(0, ii));
                     this.secondOperand = Double.parseDouble(stringRepresentation.substring(ii + 1));
                     this.operator = ExpressionOperators.fromString(String.valueOf(stringRepresentation.charAt(ii)));
-                } catch (NumberFormatException | NullPointerException ex) {
+                } catch (final NumberFormatException | NullPointerException ex) {
                     throw new IllegalArgumentException("Error: the expression is invalid.");
                 }
 

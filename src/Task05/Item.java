@@ -8,20 +8,14 @@
 
 package Task05;
 
-public class Item {
-    // region Fields
-
-    public final double weight;
-    public final double volume;
-
-    // endregion
-
-    // region Constructors
-
-    public Item(final double weight, final double volume) {
-        this.weight = weight;
-        this.volume = volume;
+public record Item(double weight, double volume) {
+    @Override
+    public double weight() {
+        return this.weight;
     }
 
-    // endregion
+    @Override
+    public double volume() {
+        return this.volume;
+    }
 }

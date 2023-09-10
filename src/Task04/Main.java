@@ -19,36 +19,41 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        List<Double[]> fstContainer;
-        List<Double[]> sndContainer;
+        List<Double[]> firstContainer;
+        List<Double[]> secondContainer;
 
-        Matrix fstMatrix;
-        Matrix sndMatrix;
+        Matrix firstMatrix;
+        Matrix secondMatrix;
 
         System.out.println("Welcome to the matrix multiplication calculator.");
 
-        while (true) try {
-            System.out.println("Enter first matrix:\n");
-            fstContainer = getContainer(reader);
-            fstMatrix = new Matrix(fstContainer);
+        while (true) {
+            try {
+                System.out.println("Enter first matrix:\n");
+                firstContainer = getContainer(reader);
+                firstMatrix = new Matrix(firstContainer);
 
-            while (true) try {
-                System.out.println("Enter second matrix:\n");
-                sndContainer = getContainer(reader);
-                sndMatrix = new Matrix(sndContainer);
+                while (true) {
+                    try {
+                        System.out.println("Enter second matrix:\n");
+                        secondContainer = getContainer(reader);
+                        secondMatrix = new Matrix(secondContainer);
 
-                try {
-                    final Matrix product = fstMatrix.multiply(sndMatrix);
-                    System.out.print(product.toString() + "\n");
-                    break;
-                } catch (IllegalArgumentException ex) {
-                    System.out.println(ex.getMessage() + "\n");
+                        try {
+                            final Matrix product = firstMatrix.multiply(secondMatrix);
+                            System.out.print(product.toString() + "\n");
+                            break;
+                        } catch (IllegalArgumentException ex) {
+                            System.out.println(ex.getMessage() + "\n");
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println(ex.getMessage() + "\n");
+                    }
                 }
+                break;
             } catch (IllegalArgumentException ex) {
                 System.out.println(ex.getMessage() + "\n");
-            } break;
-        } catch (IllegalArgumentException ex) {
-            System.out.println(ex.getMessage() + "\n");
+            }
         }
     }
 
@@ -62,20 +67,18 @@ public class Main {
         while (true) {
             input = reader.readLine();
             if (input.isEmpty()) {
-                if (container.isEmpty())
+                if (container.isEmpty()) {
                     throw new IllegalArgumentException("The matrix must contain at least one row.");
-                else
+                } else {
                     return container;
+                }
             }
-
 
             splitInput = input.split(" ");
 
             try {
                 // Maps each string to double and converts to array.
-                row = Arrays.stream(splitInput)
-                        .map(Double::valueOf)
-                        .toArray(Double[]::new);
+                row = Arrays.stream(splitInput).map(Double::valueOf).toArray(Double[]::new);
 
                 container.add(row);
             } catch (NumberFormatException ex) {

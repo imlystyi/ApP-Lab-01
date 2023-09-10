@@ -16,8 +16,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
         final BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        System.out.print("Enter lines separated by spaces.\n" +
-                "> ");
+        System.out.print("Enter lines separated by spaces.\n> ");
         final String input = reader.readLine();
         final String[] strings = input.split(" ");
 
@@ -37,7 +36,8 @@ public class Main {
         }
 
         System.out.println("Sorted: ");
-        for (final String ss: strings)
+        for (final String ss : strings) {
             System.out.print(ss + " ");
+        }
     }
 }

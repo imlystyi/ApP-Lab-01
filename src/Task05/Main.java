@@ -23,27 +23,27 @@ public class Main {
 
         System.out.println("\n[Must be an exception: points cannot be the same]");
         try {
-            service.addShipment(0, point1, ShipmentMethods.BY_BICYCLE, item1);
+            service.createShipment(1, point1, ShipmentMethods.BY_BICYCLE, item1);
         } catch (final IllegalArgumentException ex) {
             System.out.println("\n" + ex.getMessage());
         }
 
-        service.addShipment(1, point1, ShipmentMethods.BY_BICYCLE, item1);
+        service.createShipment(2, point1, ShipmentMethods.BY_BICYCLE, item1);
         System.out.println("\n[Must be 1 shipment: by bicycle]\n");
         service.displayShipments();
 
-        service.cancelShipment(1, 1);
+        service.cancelShipment(1);
         System.out.println("[Must be no shipment]\n");
         service.displayShipments();
 
-        service.addShipment(1, point2, ShipmentMethods.BY_BUS, item1);
-        service.addShipment(1, point1, ShipmentMethods.BY_TRUCK, item4);
-        System.out.println("[Must be 2 shipments: by bicycle, by bus]\n");
+        service.createShipment(1, point2, ShipmentMethods.BY_BUS, item1);
+        service.createShipment(4, point1, ShipmentMethods.BY_TRUCK, item4);
+        System.out.println("[Must be 2 shipments: by bicycle, by truck]\n");
         service.displayShipments();
 
         System.out.println("[Must be an exception: the item is too heavy or too big.]");
         try {
-            service.addShipment(5, point1, ShipmentMethods.BY_BICYCLE, item4);
+            service.createShipment(5, point1, ShipmentMethods.BY_BICYCLE, item4);
         } catch (final IllegalArgumentException ex) {
             System.out.println("\n" + ex.getMessage());
         }
