@@ -33,12 +33,12 @@ public class DeliveryService {
                                final ShipmentMethods method, final Item item) {
         final DeparturePoint departurePoint = DEPARTURE_POINTS[departurePointNumber - 1];
 
-        if (departurePoint.equals(receivePoint)) {
+        if (departurePoint.hasSameAddress(receivePoint)) {
             throw new IllegalArgumentException("Points cannot be the same.");
         }
 
         for (final DeparturePoint point : DEPARTURE_POINTS) {
-            if (receivePoint.equals(point)) {
+            if (receivePoint.hasSameAddress(point)) {
                 final Shipment shipment = new Shipment(departurePoint, point, method, item);
                 this.addShipment(shipment);
 

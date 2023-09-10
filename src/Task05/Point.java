@@ -33,26 +33,14 @@ public abstract class Point {
 
     // region Methods
 
-    @Override
-    public String toString() {
-        return String.format("%s oblast, %s, %s, %s", this.oblast, this.city, this.street, this.building);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (!(obj instanceof Point point)) {
-            return false;
-        }
+    public boolean hasSameAddress(Point point) {
         return Objects.equals(this.oblast, point.oblast) && Objects.equals(this.city, point.city) &&
                Objects.equals(this.street, point.street) && Objects.equals(this.building, point.building);
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(this.oblast, this.city, this.street, this.building);
+    public String toString() {
+        return String.format("%s oblast, %s, %s, %s", this.oblast, this.city, this.street, this.building);
     }
 
     // endregion
