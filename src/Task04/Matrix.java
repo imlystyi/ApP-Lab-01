@@ -13,7 +13,7 @@ import java.util.List;
 public class Matrix {
     // region Fields
 
-    public final double[][] container;
+    public final Double[][] container;
 
     // endregion
 
@@ -41,16 +41,16 @@ public class Matrix {
             }
         }
 
-        this.container = new double[numRows][numCols];
+        this.container = new Double[numRows][numCols];
         for (int ii = 0; ii < numRows; ii++) {
             System.arraycopy(rows.get(ii), 0, this.container[ii], 0, numCols);
         }
     }
 
-    public Matrix(final double[][] container) {
+    public Matrix(final Double[][] container) {
         final int numCols = container[0].length;
 
-        for (final double[] row : container) {
+        for (final Double[] row : container) {
             if (row.length != numCols) {
                 throw new IllegalArgumentException("The matrix is not rectangular.");
             }
@@ -73,7 +73,7 @@ public class Matrix {
         final int numCols = that.getNumCols();
         final int multiplyRank = this.getNumCols();
 
-        final double[][] productContainer = new double[numRows][numCols];
+        final Double[][] productContainer = new Double[numRows][numCols];
 
         for (int ii = 0; ii < numRows; ii++) {
             for (int jj = 0; jj < numCols; jj++) {
@@ -91,7 +91,7 @@ public class Matrix {
     public String toString() {
         final StringBuilder sb = new StringBuilder();
 
-        for (final double[] row : this.container) {
+        for (final Double[] row : this.container) {
             sb.append("\n");
             for (final Double element : row) {
                 sb.append(element).append(" ");
